@@ -1,0 +1,15 @@
+# typings
+typings/
+
+#.vscode
+.vscode/
+
+#node_modules
+node_modules/
+
+# 编译后的文件
+app/**/*.js
+app/**/*.js.map
+
+#.ds_store
+**/.DS_Store
