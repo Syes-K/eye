@@ -1,0 +1,42 @@
+<div>
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th [style.width]="'40px'"></th>
+                <th [style.width]="'180px'">Ref No</th>
+                <th>Desc</th>
+                 <th [style.width]="'182px'">Date</th>
+                <th>Note</th>
+               
+                <th [style.width]="'90px'">Status</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let item of list;let i =index">
+                <td>{{i+1}}</td>
+                <td>
+                    <input type="text" class="form-control" [(ngModel)]="item.refNo">
+                </td>
+                <td>
+                    <textarea type="text" class="form-control" [(ngModel)]="item.desc"></textarea> 
+                </td>
+               
+                <td>
+                    <input type="date" class="form-control" [(ngModel)]="item.date">
+                </td>
+                 <td>
+                    <textarea type="text" class="form-control" [(ngModel)]="item.note"></textarea>
+                </td>
+                <td>
+                    <span class="label" [ngClass]="trasferStatusCss(item.status)">
+                        {{item.status|taskStatusText}}
+                    </span>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <div>
+         <button class="btn btn-success pull-right" (click)="save()" >Save</button>
+    </div>
+   
+</div>

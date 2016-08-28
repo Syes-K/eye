@@ -1,0 +1,10 @@
+table{
+    table-layout: fixed;
+}
+td .label{
+    line-height: 32px;
+}
+td textarea.form-control{
+    height:34px;
+    max-width:100%;
+}
