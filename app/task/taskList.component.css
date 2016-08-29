@@ -8,3 +8,11 @@ td textarea.form-control{
     height:34px;
     max-width:100%;
 }
+
+.table >tbody >tr > td.td-operate{
+    padding: 0px;
+}
+.table >tbody >tr > td.td-operate button.btn{
+    border: none;
+    border-radius: 0px;
+}

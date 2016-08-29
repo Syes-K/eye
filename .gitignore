@@ -13,3 +13,6 @@ app/**/*.js.map
 
 #.ds_store
 **/.DS_Store
+
+#documentation
+documentation/
