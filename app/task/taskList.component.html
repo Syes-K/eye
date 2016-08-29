@@ -8,7 +8,7 @@
                  <th [style.width]="'182px'">Date</th>
                 <th>Note</th>
                
-                <th [style.width]="'90px'">Status</th>
+                <th [style.width]="'40px'"></th>
             </tr>
         </thead>
         <tbody>
@@ -28,14 +28,16 @@
                     <textarea type="text" class="form-control" [(ngModel)]="item.note"></textarea>
                 </td>
                 <td>
-                    <span class="label" [ngClass]="trasferStatusCss(item.status)">
-                        {{item.status|taskStatusText}}
-                    </span>
+                    <div style="position:relative;inline-block;">
+                        <span class="task-status-icon glyphicon " [ngClass]="trasferStatusCss(item.status)" title= {{item.status|taskStatusText}}></span>
+                        <div class="task-status-broadcast"></div>
+                    </div>
+                    
                 </td>
             </tr>
             <tr>
                 <td colspan="6" class="td-operate">
-                    <button class="btn btn-block btn-default"> <i class="glyphicon glyphicon-plus"></i> Add</button>            
+                    <button class="btn btn-block btn-default" (click)="addTask()" > <i class="glyphicon glyphicon-plus"></i> Add</button>            
                 </td>
             </tr>
         </tbody>

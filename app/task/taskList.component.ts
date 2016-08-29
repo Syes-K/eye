@@ -23,13 +23,6 @@ export class TaskListComponent implements OnInit {
     }
 
     ngOnInit() { }
-    trasferStatusCss(status) {
-        return {
-            '1': 'label-default',
-            '2': 'label-danger',
-            '3':'label-success'
-        }[status]
-    }
     private processListStatus(){
         this.list.forEach(task=>{
             if(task.status==='3'){//完成的状态不用处理
@@ -41,6 +34,18 @@ export class TaskListComponent implements OnInit {
             }
         });
     } 
+    trasferStatusCss(status) {
+        return {
+            '1': 'text-default glyphicon-info-sign',
+            '2': 'text-danger glyphicon-exclamation-sign',
+            '3':'text-success glyphicon-ok-sign'
+        }[status]
+    }
+    addTask(){
+        let task = new Task();
+        task.status='1';
+        this.list.push(task);
+    }
     save() {
         console.log(this.list)
     }
