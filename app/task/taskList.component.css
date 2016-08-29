@@ -79,7 +79,7 @@ td .task-status-icon{
 .task-status-icon.text-danger~.task-status-broadcast{
     position: absolute;
     top:50%;
-    left:50%;
+    left:0;
     width: 16px;
     height:16px;
     margin-left:0; 
