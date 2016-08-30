@@ -1,0 +1,19 @@
+<div class="task-status" 
+                    (mouseenter)="task_status_element.isActive=true"
+                    (mouseleave)="task_status_element.isActive=false"
+                    [class.active]="task_status_element.isActive" 
+                    #task_status_element >
+        <span class="task-status-icon glyphicon " [ngClass]="trasferStatusCss(innerValue)" title="{{innerValue|taskStatusText}}"></span>
+        <div class="task-status-broadcast"></div>
+        <ul class="list-group" (click)="task_status_element.isActive=false">
+            <li class="list-group-item" (click)="selectStatus('1')">
+                <i class="text-default glyphicon glyphicon-info-sign"></i>
+            </li>
+            <li class="list-group-item" (click)="selectStatus('2')">
+                <i class="text-danger glyphicon glyphicon-exclamation-sign"></i>
+            </li>
+            <li class="list-group-item" (click)="selectStatus('3')">
+                <i class="text-success glyphicon glyphicon-ok-sign"></i>
+            </li>
+        </ul>
+</div>

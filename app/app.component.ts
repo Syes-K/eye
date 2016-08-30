@@ -1,3 +1,6 @@
+import {AppService} from './app.service';
+
+import {Task} from './task/task.class';
 import {Component, OnInit} from '@angular/core';
 import {Router} from '@angular/router';
 
@@ -23,7 +26,7 @@ import {Router} from '@angular/router';
     `
 })
 export class AppComponent implements OnInit {
-    constructor(private r:Router) { }
+    constructor(private r:Router,appService:AppService) { }
 
     ngOnInit() { 
         

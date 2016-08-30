@@ -1,4 +1,17 @@
 <div>
+    <div class="task-list-header input-group">
+        <div class="input-group-btn">
+            <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Action <span class="caret"></span></button>
+            <ul class="dropdown-menu">
+                <li><a href="#">Action</a></li>
+                <li><a href="#">Another action</a></li>
+                <li><a href="#">Something else here</a></li>
+                <li role="separator" class="divider"></li>
+                <li><a href="#">Separated link</a></li>
+            </ul>
+        </div>
+        <input type="text" class="form-control task-search-key">
+    </div>
     <table class="table table-bordered">
         <thead>
             <tr>
@@ -8,7 +21,7 @@
                  <th [style.width]="'182px'">Date</th>
                 <th>Note</th>
                
-                <th [style.width]="'40px'"></th>
+                <th [style.width]="'34px'"></th>
             </tr>
         </thead>
         <tbody>
@@ -28,11 +41,9 @@
                     <textarea type="text" class="form-control" [(ngModel)]="item.note"></textarea>
                 </td>
                 <td>
-                    <div style="position:relative;inline-block;">
-                        <span class="task-status-icon glyphicon " [ngClass]="trasferStatusCss(item.status)" title= {{item.status|taskStatusText}}></span>
-                        <div class="task-status-broadcast"></div>
-                    </div>
-                    
+                    <agl-task-list-status-operate 
+                            [(ngModel)]="item.status" ngDefaultControl> 
+                    </agl-task-list-status-operate>
                 </td>
             </tr>
             <tr>

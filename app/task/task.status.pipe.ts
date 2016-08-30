@@ -5,10 +5,11 @@ import {Pipe, PipeTransform} from '@angular/core';
     name: 'taskStatusText'
 })
 export class TaskStatusTextPipe implements PipeTransform {
-      
+
     transform(value: any, args: any[]): any {
-        return TaskService.TaskStatuses.find(i=>{
-            return i.value==value;
-        }).text;
+        var taskStatus = TaskService.TaskStatuses.find(i => {
+            return i.value == value;
+        });
+        return taskStatus ? taskStatus.text : '';
     }
 }

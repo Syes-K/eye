@@ -16,3 +16,4 @@ app/**/*.js.map
 
 #documentation
 documentation/
+jsconfig.json
