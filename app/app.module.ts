@@ -6,15 +6,12 @@ import {HttpModule} from '@angular/http';
 
 import {AppComponent} from './app.component';
 import {routing} from './app.routing';
-
-import {CommonModule} from './common/common.module';
 import {TaskComponent} from './task/task.component';
 
 @NgModule({
     imports: [
         BrowserModule,
         HttpModule,
-        CommonModule,
         TaskModule,
         routing,
     ],

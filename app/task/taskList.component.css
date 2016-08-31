@@ -1,6 +1,9 @@
 .task-list-header{
     margin-bottom: 10px;
 }
+.task-list-header .input-group-btn button{
+    width:100px;
+}
 
 .task-list-header .task-search-key{
     width: 220px;
@@ -22,4 +25,8 @@ td textarea.form-control{
 .table >tbody >tr > td.td-operate button.btn{
     border: none;
     border-radius: 0px;
+}
+.table >tbody >tr > td .task-del{
+    line-height: 32px;
+    cursor: pointer;
 }

@@ -16,7 +16,7 @@ export const CUSTOM_INPUT_CONTROL_VALUE_ACCESSOR: any = {
     providers:[CUSTOM_INPUT_CONTROL_VALUE_ACCESSOR]
 }) 
 export class TaskStatusOperateComponent implements ControlValueAccessor {
-    private innerValue: any = '';
+    private _value: any = '';
     statusList;
     constructor() {
         this.statusList = TaskService.TaskStatuses;
@@ -38,19 +38,19 @@ export class TaskStatusOperateComponent implements ControlValueAccessor {
     private onChangeCallback: (_: any) => void = noop;
 
     get value(): any {
-        return this.innerValue;
+        return this._value;
     }
     set value(v: any) {
-        if (v !== this.innerValue) {
-            this.innerValue = v;
+        if (v !== this._value) {
+            this._value = v;
             this.onChangeCallback(v);
         }
     }
     
     //From ControlValueAccessor interface
     writeValue(value: any) {
-        if (value !== this.innerValue) {
-            this.innerValue = value;
+        if (value !== this._value) {
+            this._value = value;
         }
     }
     //From ControlValueAccessor interface

@@ -1,10 +1,11 @@
+import {ArrayFilter} from './filterArrayByProp.pipe';
 import { NgModule } from '@angular/core';
 
 
 @NgModule({
     imports: [],
-    exports: [],
-    declarations: [],
+    exports: [ArrayFilter],
+    declarations: [ArrayFilter],
     providers: [],
 })
 export class CommonModule { }
