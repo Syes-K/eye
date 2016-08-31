@@ -3,7 +3,7 @@
                     (mouseleave)="task_status_element.isActive=false"
                     [class.active]="task_status_element.isActive" 
                     #task_status_element >
-        <span class="task-status-icon glyphicon " [ngClass]="trasferStatusCss(innerValue)" title="{{innerValue|taskStatusText}}"></span>
+        <span class="task-status-icon glyphicon " [ngClass]="trasferStatusCss(value)" title="{{value|taskStatusText}}"></span>
         <div class="task-status-broadcast"></div>
         <ul class="list-group" (click)="task_status_element.isActive=false">
             <li class="list-group-item" (click)="selectStatus('1')">
