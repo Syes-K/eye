@@ -1,3 +1,4 @@
+import {RefNoValidator} from './task.validator';
 import {CommonModule} from '../common/common.module';
 import {TaskStatusOperateComponent} from './taskStatusOperate.component';
 import {TaskComponent} from './task.component';
@@ -13,7 +14,7 @@ import {BrowserModule} from '@angular/platform-browser';
 @NgModule({
     imports: [BrowserModule, FormsModule, CommonModule,routing],
     exports: [TaskComponent],
-    declarations: [TaskComponent, TaskListComponent,TaskStartComponent,TaskStatusOperateComponent, TaskStatusTextPipe],
+    declarations: [TaskComponent, TaskListComponent,TaskStartComponent,TaskStatusOperateComponent, TaskStatusTextPipe,RefNoValidator],
     providers: [TaskService],
 })
 export class TaskModule { }

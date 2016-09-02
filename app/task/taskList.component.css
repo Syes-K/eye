@@ -30,3 +30,7 @@ td textarea.form-control{
     line-height: 32px;
     cursor: pointer;
 }
+
+.ng-invalid{
+    border: 1px solid red;
+}
