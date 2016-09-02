@@ -15,7 +15,7 @@ export class ArrayFilter implements PipeTransform {
             return array.filter(item => {
                 var isInclude = false;
                 valueArray.forEach(v => {
-                    if (v && item[prop].includes(v)) {
+                    if (v && item[prop] && item[prop].includes(v)) {
                         isInclude = true;
                     }
                 });

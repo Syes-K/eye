@@ -5,10 +5,9 @@
                 {{currentSearchCondition.text}} <span class="caret"></span>
             </button>
             <ul class="dropdown-menu">
-                <li *ngFor="let searchCondition of searchConditions"
-                        (click)="selectSearchCondition(searchCondition,taskSearchKeyControl)">
+                <li *ngFor="let searchCondition of searchConditions" (click)="selectSearchCondition(searchCondition,taskSearchKeyControl)">
                     <a>{{searchCondition.text}}</a>
-               </li>
+                </li>
             </ul>
         </div>
         <input type="text" class="form-control task-search-key" [(ngModel)]="taskSearchKey" #taskSearchKeyControl>
@@ -19,9 +18,9 @@
                 <th [style.width]="'40px'"></th>
                 <th [style.width]="'180px'">Ref No</th>
                 <th>Desc</th>
-                 <th [style.width]="'182px'">Date</th>
+                <th [style.width]="'182px'">Date</th>
                 <th>Note</th>
-               
+
                 <th [style.width]="'34px'"></th>
             </tr>
         </thead>
@@ -32,55 +31,49 @@
                     <input type="text" class="form-control" [(ngModel)]="item.refNo">
                 </td>
                 <td>
-                    <textarea type="text" class="form-control" [(ngModel)]="item.desc"></textarea> 
+                    <textarea type="text" class="form-control" [(ngModel)]="item.desc"></textarea>
                 </td>
-               
+
                 <td>
                     <input type="date" class="form-control" [(ngModel)]="item.date">
                 </td>
-                 <td>
+                <td>
                     <textarea type="text" class="form-control" [(ngModel)]="item.note"></textarea>
                 </td>
                 <td>
-                    <agl-task-list-status-operate 
-                            [(ngModel)]="item.status" ngDefaultControl> 
+                    <agl-task-list-status-operate [(ngModel)]="item.status" ngDefaultControl>
                     </agl-task-list-status-operate>
                 </td>
             </tr>
             <tr>
                 <td colspan="6" class="td-operate">
-                    <button class="btn btn-block btn-default" (click)="addTask()" >...</button>            
+                    <button class="btn btn-block btn-default" (click)="addTask()">...</button>
                 </td>
             </tr>
-       
-            <tr *ngIf="newList.length"><td colspan="6">new List</td></tr>
+
+            <tr *ngIf="newList.length">
+                <td colspan="6">new List</td>
+            </tr>
             <tr *ngFor="let item of newList">
                 <td><span (click)="delTask(item)" class="task-del text-danger glyphicon glyphicon-remove"></span></td>
                 <td>
                     <input type="text" class="form-control" [(ngModel)]="item.refNo">
                 </td>
                 <td>
-                    <textarea type="text" class="form-control" [(ngModel)]="item.desc"></textarea> 
+                    <textarea type="text" class="form-control" [(ngModel)]="item.desc"></textarea>
                 </td>
-               
+
                 <td>
                     <input type="date" class="form-control" [(ngModel)]="item.date">
                 </td>
-                 <td>
+                <td>
                     <textarea type="text" class="form-control" [(ngModel)]="item.note"></textarea>
                 </td>
                 <td>
-                    <agl-task-list-status-operate 
-                            [(ngModel)]="item.status" ngDefaultControl> 
+                    <agl-task-list-status-operate [(ngModel)]="item.status" ngDefaultControl>
                     </agl-task-list-status-operate>
                 </td>
             </tr>
         </tbody>
     </table>
-    <div>
-
-         <button class="btn btn-success pull-right" (click)="save()" >Save</button>
-         <button class="btn btn-default pull-right" (click)="addTask()" >Add</button>
-    </div>
-   
 </div>

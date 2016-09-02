@@ -1,3 +1,4 @@
+import {AppService,GlobalOperateEventArgs} from '../app.service';
 import {TaskStatusOperateComponent} from './taskStatusOperate.component';
 import {Task} from './task.class';
 import {TaskService} from './task.service';
@@ -25,7 +26,19 @@ export class TaskListComponent implements OnInit {
     ];//搜索条件集合
     private currentSearchCondition: any = this.searchConditions[4];//档前搜索条件
     private taskSearchKey: string = '1,2';//当前搜索条件的value 1 或者 2
-    constructor(private taskService: TaskService) {
+    constructor(private taskService: TaskService,private appService:AppService) {
+        this.appService.globalOperateEvents.subscribe((e:GlobalOperateEventArgs)=>{
+            switch(e.eventName){
+                case 'new':
+                    this.addTask();
+                break;
+                case 'save':
+                    this.save();
+                break;
+                default:
+                break;
+            }        
+        });
         this.currentDate = new Date();
         this.initList();
     }
