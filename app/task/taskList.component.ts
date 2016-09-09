@@ -2,7 +2,9 @@ import {AppService,GlobalOperateEventArgs} from '../app.service';
 import {TaskStatusOperateComponent} from './taskStatusOperate.component';
 import {Task} from './task.class';
 import {TaskService} from './task.service';
-import {Component, OnInit} from '@angular/core';
+import {Component, OnInit,OnDestroy} from '@angular/core';
+import {Observable} from 'rxjs/Observable';
+import 'rxjs/add/operator/debounceTime';
 //2天为到期提醒时间
 //状态为1(new)的task 到期后自动转化为2(process)
 const expirationTime: number = 1000 * 60 * 60 * 24 * 2;
@@ -14,6 +16,7 @@ const expirationTime: number = 1000 * 60 * 60 * 24 * 2;
     directives: [TaskStatusOperateComponent]
 })
 export class TaskListComponent implements OnInit {
+    private globalEventHandlers;
     private currentDate: Date;
     private list: Task[] = [];
     private newList: Task[] = [];
@@ -27,7 +30,12 @@ export class TaskListComponent implements OnInit {
     private currentSearchCondition: any = this.searchConditions[4];//档前搜索条件
     private taskSearchKey: string = '1,2';//当前搜索条件的value 1 或者 2
     constructor(private taskService: TaskService,private appService:AppService) {
-        this.appService.globalOperateEvents.subscribe((e:GlobalOperateEventArgs)=>{
+
+  
+       this.globalEventHandlers = this.appService.globalOperateEvents
+       .asObservable().debounceTime(200)
+       .subscribe((e:GlobalOperateEventArgs)=>{
+            console.log('list页global事件');
             switch(e.eventName){
                 case 'new':
                     this.addTask();
@@ -43,8 +51,11 @@ export class TaskListComponent implements OnInit {
         this.initList();
     }
 
-    ngOnInit() { }
-    private processListStatus() {
+    ngOnInit():void { }
+    ngOnDestroy():void{
+        this.globalEventHandlers.unsubscribe();
+    }
+    private processListStatus():void {
         this.list.forEach(task => {
             if (task.status === '3') {//完成的状态不用处理
                 return;
@@ -56,7 +67,7 @@ export class TaskListComponent implements OnInit {
         });
     }
 
-    private initList() {
+    private initList():void {
         this.taskService.getTasks().then(tasks => {
             this.list = tasks;
             this.processListStatus();
@@ -64,10 +75,10 @@ export class TaskListComponent implements OnInit {
         });
     }
 
-    private selectSearchCondition(searchCondition, taskSearchKeyControl) {
+    private selectSearchCondition(searchCondition:any, taskSearchKeyControl:HTMLInputElement):void {
         this.currentSearchCondition = searchCondition; 
         this.taskSearchKey = ''; 
-        taskSearchKeyControl.focus()
+        taskSearchKeyControl.focus();
     }
 
     private addTask(): void {
