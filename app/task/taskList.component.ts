@@ -4,6 +4,7 @@ import {Task} from './task.class';
 import {TaskService} from './task.service';
 import {Component, OnInit,OnDestroy} from '@angular/core';
 import {Observable} from 'rxjs/Observable';
+import {Subscription} from 'rxjs/Subscription';
 import 'rxjs/add/operator/debounceTime';
 //2天为到期提醒时间
 //状态为1(new)的task 到期后自动转化为2(process)
@@ -17,6 +18,7 @@ const expirationTime: number = 1000 * 60 * 60 * 24 * 2;
 })
 export class TaskListComponent implements OnInit {
     private globalEventHandlers;
+    private globalSaveSubscription:Subscription;
     private currentDate: Date;
     private list: Task[] = [];
     private newList: Task[] = [];
@@ -35,17 +37,18 @@ export class TaskListComponent implements OnInit {
        this.globalEventHandlers = this.appService.globalOperateEvents
        .asObservable().debounceTime(200)
        .subscribe((e:GlobalOperateEventArgs)=>{
-            console.log('list页global事件');
             switch(e.eventName){
                 case 'new':
                     this.addTask();
                 break;
-                case 'save':
-                    this.save();
-                break;
                 default:
                 break;
             }        
+        });
+        this.globalSaveSubscription=this.appService.GlobalOperateObservable["globalSave"]
+        .debounceTime(200)
+        .subscribe((btn)=>{
+              this.save();
         });
         this.currentDate = new Date();
         this.initList();
@@ -54,6 +57,7 @@ export class TaskListComponent implements OnInit {
     ngOnInit():void { }
     ngOnDestroy():void{
         this.globalEventHandlers.unsubscribe();
+        this.globalSaveSubscription.unsubscribe();
     }
     private processListStatus():void {
         this.list.forEach(task => {

@@ -1,5 +1,5 @@
 import { Injectable,EventEmitter } from '@angular/core';
-
+import {Observable} from 'rxjs/Observable';
 export class GlobalOperateEventArgs{
     constructor(public eventName:string){};
 }
@@ -7,5 +7,9 @@ export class GlobalOperateEventArgs{
 @Injectable()
 export class AppService {
     globalOperateEvents:EventEmitter<GlobalOperateEventArgs>= new EventEmitter<GlobalOperateEventArgs>();
-    constructor() { }
+    GlobalOperateObservable:{[index:string]:Observable<any>}={};
+
+    constructor() { 
+
+    }
 }
