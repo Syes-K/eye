@@ -17,18 +17,18 @@ export const CUSTOM_INPUT_CONTROL_VALUE_ACCESSOR: any = {
 }) 
 export class TaskStatusOperateComponent implements ControlValueAccessor {
     private _value: any = '';
-    statusList;
+    private _statusList;
     constructor() {
-        this.statusList = TaskService.TaskStatuses;
+        this._statusList = TaskService.TaskStatuses;
     }
-    trasferStatusCss(status) {
+    private trasferStatusCss(status) {
         return {
             '1': 'text-default glyphicon-info-sign',
             '2': 'text-danger glyphicon-exclamation-sign',
             '3': 'text-success glyphicon-ok-sign'
         }[status]
     }
-    selectStatus(status) {
+    private selectStatus(status) {
          this.value = status; 
     }
 

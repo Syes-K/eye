@@ -48,9 +48,9 @@
                     </agl-task-list-status-operate>
                 </td>
             </tr>
-            <tr>
+            <tr *ngIf="(list|arrayFilter:currentSearchCondition.key:taskSearchKey).length>10">
                 <td colspan="6" class="td-operate">
-                    <button class="btn btn-block btn-default" (click)="addTask()">...</button>
+                    <button class="btn btn-block btn-default" >...</button>
                 </td>
             </tr>
 

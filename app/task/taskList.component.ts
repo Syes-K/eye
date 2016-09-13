@@ -1,8 +1,8 @@
-import {AppService,GlobalOperateEventArgs} from '../app.service';
+import {AppService, GlobalOperateEventArgs, GlobalOperateObservableArgs, GlobalOperateSubjectArgs} from '../app.service';
 import {TaskStatusOperateComponent} from './taskStatusOperate.component';
 import {Task} from './task.class';
 import {TaskService} from './task.service';
-import {Component, OnInit,OnDestroy} from '@angular/core';
+import {Component, OnInit, OnDestroy} from '@angular/core';
 import {Observable} from 'rxjs/Observable';
 import {Subscription} from 'rxjs/Subscription';
 import 'rxjs/add/operator/debounceTime';
@@ -17,8 +17,9 @@ const expirationTime: number = 1000 * 60 * 60 * 24 * 2;
     directives: [TaskStatusOperateComponent]
 })
 export class TaskListComponent implements OnInit {
-    private globalEventHandlers;
-    private globalSaveSubscription:Subscription;
+    private globalInitSubscription: Subscription;
+    private globalEventHandlers: Subscription;
+    private globalSaveSubscription: Subscription;
     private currentDate: Date;
     private list: Task[] = [];
     private newList: Task[] = [];
@@ -31,35 +32,47 @@ export class TaskListComponent implements OnInit {
     ];//搜索条件集合
     private currentSearchCondition: any = this.searchConditions[4];//档前搜索条件
     private taskSearchKey: string = '1,2';//当前搜索条件的value 1 或者 2
-    constructor(private taskService: TaskService,private appService:AppService) {
+    constructor(private taskService: TaskService, private appService: AppService) {
+        this.globalInitSubscription = this.appService.globalOperateSubject['globalInit'].subscribe((e: GlobalOperateSubjectArgs) => {
+            this.initSearchCondition();
+            this.initList();
+            console.log(e);
+        });
 
-  
-       this.globalEventHandlers = this.appService.globalOperateEvents
-       .asObservable().debounceTime(200)
-       .subscribe((e:GlobalOperateEventArgs)=>{
-            switch(e.eventName){
-                case 'new':
-                    this.addTask();
-                break;
-                default:
-                break;
-            }        
-        });
-        this.globalSaveSubscription=this.appService.GlobalOperateObservable["globalSave"]
-        .debounceTime(200)
-        .subscribe((btn)=>{
-              this.save();
-        });
+        this.globalEventHandlers = this.appService.globalOperateEvents
+            .asObservable().debounceTime(200)
+            .subscribe((e: GlobalOperateEventArgs) => {
+                switch (e.eventName) {
+                    case 'new':
+                        this.addTask();
+                        break;
+                    default:
+                        break;
+                }
+            });
+        this.globalSaveSubscription = this.appService.globalOperateObservable["globalSave"]
+            .debounceTime(200)
+            .subscribe((args) => {
+                console.log(args);
+                this.save();
+            });
         this.currentDate = new Date();
         this.initList();
     }
 
-    ngOnInit():void { }
-    ngOnDestroy():void{
+    ngOnInit(): void { }
+    ngOnDestroy(): void {
+        this.globalInitSubscription.unsubscribe();
         this.globalEventHandlers.unsubscribe();
         this.globalSaveSubscription.unsubscribe();
     }
-    private processListStatus():void {
+
+    private initSearchCondition(){
+            this.currentSearchCondition = this.searchConditions[4]
+            this.taskSearchKey = '1,2';
+    }
+
+    private processListStatus(): void {
         this.list.forEach(task => {
             if (task.status === '3') {//完成的状态不用处理
                 return;
@@ -71,7 +84,7 @@ export class TaskListComponent implements OnInit {
         });
     }
 
-    private initList():void {
+    private initList(): void {
         this.taskService.getTasks().then(tasks => {
             this.list = tasks;
             this.processListStatus();
@@ -79,9 +92,9 @@ export class TaskListComponent implements OnInit {
         });
     }
 
-    private selectSearchCondition(searchCondition:any, taskSearchKeyControl:HTMLInputElement):void {
-        this.currentSearchCondition = searchCondition; 
-        this.taskSearchKey = ''; 
+    private selectSearchCondition(searchCondition: any, taskSearchKeyControl: HTMLInputElement): void {
+        this.currentSearchCondition = searchCondition;
+        this.taskSearchKey = '';
         taskSearchKeyControl.focus();
     }
 
