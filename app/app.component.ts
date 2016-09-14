@@ -1,11 +1,9 @@
 import {AppService,GlobalOperateEventArgs,GlobalOperateObservableArgs,GlobalOperateSubjectArgs} from './app.service';
 
-import {Task} from './task/task.class';
 import {Component, OnInit} from '@angular/core';
 import {Router} from '@angular/router';
 import {Observable} from 'rxjs/Observable';
 import {Observer} from 'rxjs/Observer';
-import {Subject} from 'rxjs/Subject';
 import  'rxjs/add/observable/fromEvent';
 @Component({
     moduleId: module.id,
@@ -19,6 +17,7 @@ import  'rxjs/add/observable/fromEvent';
                 <div class="container"> 
                     <ul class="nav navbar-nav">
                         <li routerLinkActive="active"><a routerLink="index/task/list" >list</a> </li>
+                        <li routerLinkActive="active"><a routerLink="index/shot" >Shot</a> </li>
                     </ul>
                     <div class="navbar-form navbar-right">
                         <button class="btn btn-default" (click)="globalEvent_init(btnInit)" #btnInit>Init</button>

@@ -1,9 +1,7 @@
 import {AppService, GlobalOperateEventArgs, GlobalOperateObservableArgs, GlobalOperateSubjectArgs} from '../app.service';
-import {TaskStatusOperateComponent} from './taskStatusOperate.component';
 import {Task} from './task.class';
 import {TaskService} from './task.service';
 import {Component, OnInit, OnDestroy} from '@angular/core';
-import {Observable} from 'rxjs/Observable';
 import {Subscription} from 'rxjs/Subscription';
 import 'rxjs/add/operator/debounceTime';
 //2天为到期提醒时间
@@ -13,10 +11,9 @@ const expirationTime: number = 1000 * 60 * 60 * 24 * 2;
     moduleId: module.id,
     selector: 'agl-task-list',
     styleUrls: ['./taskList.component.css'],
-    templateUrl: './taskList.component.html',
-    directives: [TaskStatusOperateComponent]
+    templateUrl: './taskList.component.html'
 })
-export class TaskListComponent implements OnInit {
+export class TaskListComponent implements OnInit,OnDestroy {
     private globalInitSubscription: Subscription;
     private globalEventHandlers: Subscription;
     private globalSaveSubscription: Subscription;
@@ -68,7 +65,7 @@ export class TaskListComponent implements OnInit {
     }
 
     private initSearchCondition(){
-            this.currentSearchCondition = this.searchConditions[4]
+            this.currentSearchCondition = this.searchConditions[4];
             this.taskSearchKey = '1,2';
     }
 

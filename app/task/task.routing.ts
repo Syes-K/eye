@@ -3,7 +3,7 @@ import {TaskListComponent} from './taskList.component';
 import {TaskStartComponent} from './taskStart.component';
 import {RouterModule, Routes} from '@angular/router';
 
-let routes: Routes = [
+const routes: Routes = [
   {
     path: '',
     pathMatch: 'full',

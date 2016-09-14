@@ -1,0 +1,9 @@
+.shot-player{
+    position: absolute;
+    bottom: 5px;
+}
+
+.grant-showing{
+    transition: 3s;
+    transform:rotateY(360deg);
+}

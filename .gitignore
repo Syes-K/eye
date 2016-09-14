@@ -1,6 +1,9 @@
 # typings
 typings/
 
+# idea
+.idea
+
 #.vscode
 .vscode/
 

@@ -1,0 +1,6 @@
+.battle-field{
+    position: relative;
+    border: solid 1px #dddddd;
+    margin: 0 auto;
+    background: #eee;
+}
